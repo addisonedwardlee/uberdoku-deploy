@@ -1,6 +1,7 @@
 // bower:scss
 // endbower
 
+/* Main */
 body {
     background: #fff url(https://d1a3f4spazzrp4.cloudfront.net/web-fresh/pattern-grid@2x.jpg) repeat left top;
     background-size: 18px 18px;
@@ -12,28 +13,67 @@ body {
 }
 
 header {
+    width: 100%;
+    padding: 30px 20px 20px 20px;
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 75px;
-    text-align: center;
+    z-index: 5;
+    line-height: 10px;
     color: #fff;
     font-size: 12px;
     text-transform: uppercase;
-    background-color: #222;
-    opacity: 0.3;
+    background-color: rgba(0,0,0,.5);
+    border-bottom: 1px solid #adadad;
+    display: block;
+}
+
+.uber-logo {
+    display: inline-block;
+    width: 167px;
+    height: 23px;
+    margin-left: 130px;
+    background: transparent url(https://d1a3f4spazzrp4.cloudfront.net/web-fresh/global/logo-web-light@1x.png) no-repeat left top;
+    background-size: 167px 23px;
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    font: 0/0 a;
+    text-shadow: none;
+    color: transparent;
+}
+
+.logo-doku {
+    display: inline-block;
+    font-size: 20px;
+    letter-spacing: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.game-options {
+    margin-right: 30px;
+    margin-top: 10px; 
+}
+
+.game-options a {
+    padding: 5px 12px;
+}
+
+.new-game {
+    text-align: right;
+    border: 2px solid #1fbad6;
+    background-color: #070716;
 }
 
 #main {
-    margin: 100px auto;
+    margin: 110px auto;
     text-align: center;
     width: 300px;
     height: 300px;
     border-radius: 1px;
     box-shadow: 0 0 0 5px black, 0 0 0 10px #1fbad6;
 }
-
 
 .row { 
     width: 100%;
@@ -69,6 +109,14 @@ header {
     font-weight: bold;
 }
 
+/* Helpers */
+.center {
+    text-align: center;
+}
+
+.pull-right {
+    float:right;
+}
 
 /* Old browser */
 .browsehappy {
@@ -77,3 +125,4 @@ header {
     color: #000;
     padding: 0.2em 0;
 }
+
