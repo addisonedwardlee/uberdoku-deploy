@@ -16,7 +16,7 @@ board.App = function(options){
     
     this.difficulty = options.difficulty || 'easy';
 
-    this.board = this.generateBoard(this.difficulty);
+    this.solution = this.generateBoard(this.difficulty);
     this.render();
     this.addListeners();
 };
@@ -39,7 +39,7 @@ board.App.prototype.render = function(){
     // selector since 'this' refers to window in the functions below
     var main = this.main;
 
-    this.board.forEach(function( row, rowNum ) {
+    this.solution.forEach(function( row, rowNum ) {
         main.append('<div class="row" data-row='+rowNum+'></div>');
 
         // Create each cell in the row
@@ -52,17 +52,42 @@ board.App.prototype.render = function(){
 
 // add the necessary event listeners to each cell
 board.App.prototype.addListeners = function(){
+    // selector since 'this' refers to window in the functions below
+    var self = this;
 
+    $(document).keyup('.number-element', function( evt ) {
+        var $target = $(evt.target);
+        // update board
+        var row = $target.parent().data().row;
+        var col = $target.data().col;
+        var val = $target.val() ? parseInt( $target.val() ) : null;
+
+        if( self.checkIfValid(row, col, val) ) {
+            self.setCellCorrect( $target );
+        } else {
+            self.setCellIncorrect( $target );
+        }
+    });
 };
 
 // change the styling of the cell if correct number added
-board.App.prototype.setCellCorrect = function(){
-    
+board.App.prototype.checkIfValid = function( row, col, val){
+    if(this.solution[row][col] === val){
+        return true;
+    }
+    return false;
+};
+
+// change the styling of the cell if correct number added
+board.App.prototype.setCellCorrect = function(element){
+    element.removeClass('invalid');
+    element.addClass('valid');
 };
 
 // change the styling of the cell if incorrect number added
-board.App.prototype.setCellIncorrect = function(){
-    
+board.App.prototype.setCellIncorrect = function(element){
+    element.removeClass('valid');
+    element.addClass('invalid');
 };
 
 // show the success animation on completion
