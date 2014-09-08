@@ -62,10 +62,12 @@ board.App.prototype.addListeners = function(){
         var col = $target.data().col;
         var val = $target.val() ? parseInt( $target.val() ) : null;
 
-        if( self.checkIfValid(row, col, val) ) {
-            self.setCellCorrect( $target );
-        } else {
-            self.setCellIncorrect( $target );
+        if( row && col && val){
+            if( self.checkIfValid(row, col, val) ) {
+                self.setCellCorrect( $target );
+            } else {
+                self.setCellIncorrect( $target );
+            }
         }
     });
 };
