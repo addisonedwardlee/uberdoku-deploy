@@ -6,24 +6,23 @@ var board = {};
 board.init = function(){
     console.log('creating a new board');
     board.app = new board.App({
-        el: '#board',
         difficulty: 'easy'
     });
 };
 
 // create an App class
 board.App = function(options){
-    this.el = document.querySelector(options.el);
+    this.main = $('#main');
     
     this.difficulty = options.difficulty || 'easy';
 
-    this.generateNumbers(this.difficulty);
+    this.board = this.generateBoard(this.difficulty);
     this.render();
     this.addListeners();
 };
 
 // random sudoku game generator
-board.App.prototype.generateNumbers = function(){
+board.App.prototype.generateBoard = function(){
     return [[2,4,8,3,9,5,7,1,6],
             [5,7,1,6,2,8,3,4,9],
             [9,3,6,7,4,1,5,8,2],
@@ -37,7 +36,18 @@ board.App.prototype.generateNumbers = function(){
 
 // render the board to the page
 board.App.prototype.render = function(){
+    // selector since 'this' refers to window in the functions below
+    var main = this.main;
 
+    this.board.forEach(function( row, rowNum ) {
+        main.append('<div class="row" data-row='+rowNum+'></div>');
+
+        // Create each cell in the row
+        row.forEach(function( data, colNum ) {
+            $('.row[data-row='+rowNum+']')
+            .append('<input class="number-element" type="text" min="1" max="9" maxlength="1" data-col='+colNum+' value='+data+' />');
+        });
+    });
 };
 
 // add the necessary event listeners to each cell
