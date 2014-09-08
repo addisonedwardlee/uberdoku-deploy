@@ -83,12 +83,10 @@ board.App.prototype.checkIfValid = function( row, col, val){
 // change the styling of the cell if correct number added
 board.App.prototype.setCellCorrect = function(element){
     element.removeClass('invalid');
-    element.addClass('valid');
 };
 
 // change the styling of the cell if incorrect number added
 board.App.prototype.setCellIncorrect = function(element){
-    element.removeClass('valid');
     element.addClass('invalid');
 };
 

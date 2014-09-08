@@ -6,7 +6,7 @@ body {
     background-size: 18px 18px;
     margin: 0;
     padding: 0;
-    font-family: ff-clan-web-pro-wide,sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: 400;
     color: #222;
 }
@@ -26,11 +26,12 @@ header {
 }
 
 #main {
-    margin: auto;
+    margin: 100px auto;
     text-align: center;
     width: 300px;
     height: 300px;
-    border: 2px solid black;
+    border-radius: 1px;
+    box-shadow: 0 0 0 5px black, 0 0 0 10px #1fbad6;
 }
 
 
@@ -52,6 +53,7 @@ header {
     height: 31px;
     width: 31px;
     text-align: center;
+    cursor: pointer;
 }
 
 .number-element:nth-child(3) {
@@ -62,6 +64,13 @@ header {
     border-right: black 1px solid;
 }
 
+.invalid {
+    color: red;
+    font-weight: bold;
+}
+
+
+/* Old browser */
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
