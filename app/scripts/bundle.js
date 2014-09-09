@@ -79,10 +79,12 @@ board.App.prototype.render = function(game){
 
         // Create each cell in the row
         row.forEach(function( data, colNum ) {
+            // if the field is blank, allow the user to enter a value
             if(data === 'blank'){
                 $('.row[data-row='+rowNum+']')
                 .append('<input class="number-element" type="text" min="1" max="9" maxlength="1" data-col='+colNum+' />');
             } else {
+            // otherwise, disable the input
                 $('.row[data-row='+rowNum+']')
                 .append('<input class="number-element" type="text" min="1" max="9" maxlength="1" data-col='+colNum+' value='+data+' disabled/>');
             }

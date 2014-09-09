@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // change the styling of the cell if correct number added
 var checkIfValid = function( solution, row, col, val){
@@ -23,4 +23,4 @@ module.exports = {
     checkIfValid: checkIfValid,
     setCellIncorrect: setCellIncorrect,
     setCellCorrect: setCellCorrect
-}
+};

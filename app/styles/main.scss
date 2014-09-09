@@ -1,9 +1,13 @@
 // bower:scss
 // endbower
 
+$uberBlue: #1fbad6;
+$tileRepeat: 'https://d1a3f4spazzrp4.cloudfront.net/web-fresh/pattern-grid@2x.jpg';
+$uberLogo: 'https://d1a3f4spazzrp4.cloudfront.net/web-fresh/global/logo-web-light@1x.png';
+
 /* Main */
 body {
-    background: #fff url(https://d1a3f4spazzrp4.cloudfront.net/web-fresh/pattern-grid@2x.jpg) repeat left top;
+    background: #fff url($tileRepeat) repeat left top;
     background-size: 18px 18px;
     margin: 0;
     padding: 0;
@@ -37,7 +41,7 @@ footer {
     display: inline-block;
     width: 167px;
     height: 23px;
-    background: transparent url(https://d1a3f4spazzrp4.cloudfront.net/web-fresh/global/logo-web-light@1x.png) no-repeat left top;
+    background: transparent url($uberLogo) no-repeat left top;
     background-size: 167px 23px;
     background-color: transparent;
     border: 0;
@@ -70,7 +74,7 @@ footer {
 
 .new-game {
     text-align: right;
-    border: 2px solid #1fbad6;
+    border: 2px solid $uberBlue;
     background-color: #070716;
 }
 
@@ -80,7 +84,7 @@ footer {
     width: 300px;
     height: 300px;
     border-radius: 1px;
-    box-shadow: 0 0 0 10px black, 0 0 0 20px #1fbad6;
+    box-shadow: 0 0 0 10px black, 0 0 0 20px $uberBlue;
 }
 
 .row { 
@@ -102,6 +106,12 @@ footer {
     width: 31px;
     text-align: center;
     cursor: pointer;
+    outline: none;
+}
+
+.number-element:focus {
+    background: $uberBlue;
+    background-color: $uberBlue;
 }
 
 .number-element:nth-child(3) {

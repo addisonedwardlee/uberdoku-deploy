@@ -15,10 +15,6 @@
                 expect(board).to.exist;
                 expect(board).to.be.a.object;
             }); 
-
-            it('the board should have a .App property', function () {
-                expect(board).to.have.property('App');
-            }); 
         });
 
 
