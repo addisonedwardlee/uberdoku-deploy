@@ -3,11 +3,15 @@
 (function () {
     'use strict';
 
-    describe('Give it some context', function () {
-        describe('maybe a bit more context here', function () {
-            it('should run here few assertions', function () {
+    before(function(){
+        board.init();
+    });
 
+    describe('Sudoku primary functionality', function () {
+        describe('a new board.app should be created on init', function () {
+            it('a new board.app should be created on init', function () {
+                expect(board).to.exist;
             });
         });
-    });
+    }); 
 })();

@@ -24,7 +24,13 @@ header {
     text-transform: uppercase;
     background-color: rgba(0,0,0,.5);
     border-bottom: 1px solid #adadad;
+    box-shadow: 0 5px 10px gray;
     display: block;
+}
+
+footer {
+    width: 100%;
+    position: absolute;
 }
 
 .uber-logo {
@@ -69,12 +75,12 @@ header {
 }
 
 #main {
-    margin: 110px auto;
+    margin: 135px auto;
     text-align: center;
     width: 300px;
     height: 300px;
     border-radius: 1px;
-    box-shadow: 0 0 0 5px black, 0 0 0 10px #1fbad6;
+    box-shadow: 0 0 0 10px black, 0 0 0 20px #1fbad6;
 }
 
 .row { 

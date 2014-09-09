@@ -4,8 +4,7 @@ var board = {};
 
 // create a new game board
 board.init = function(){
-    console.log('creating a new board');
-    board.app = new board.App({
+    this.app = new board.App({
         difficulty: 'hard'
     });
 };
@@ -30,7 +29,7 @@ board.App.prototype.createGame = function(){
     this.addListeners();
 };
 
-// random sudoku game generator
+// random sudoku game generator 
 board.App.prototype.generateSolution = function(){
     return [[2,4,8,3,9,5,7,1,6],
             [5,7,1,6,2,8,3,4,9],
@@ -87,6 +86,7 @@ board.App.prototype.addListeners = function(){
     // selector since 'this' refers to window in the functions below
     var self = this;
 
+    // this listener will check if the number entered is correct
     $(document).keyup('.number-element', function( evt ) {
         var $target = $(evt.target);
         // update board
@@ -94,8 +94,8 @@ board.App.prototype.addListeners = function(){
         var col = $target.data().col;
         var val = $target.val() ? parseInt( $target.val() ) : null;
 
-        if( row && col && val){
-            console.log(row, col, val);
+        // confirm that number is entered
+        if(typeof val === 'number'){
             if( self.checkIfValid(row, col, val) ) {
                 self.setCellCorrect( $target );
             } else {
@@ -104,10 +104,12 @@ board.App.prototype.addListeners = function(){
         }
     });
 
+    // listener for new game button
     $('.new-game').click(function(){
         self.createGame(self.difficulty);
     });
 
+    // listener to show the solution
     $('.solution-button').click(function(){
         self.solveGame();
     });
@@ -131,13 +133,8 @@ board.App.prototype.setCellIncorrect = function(element){
     element.addClass('invalid');
 };
 
-// show the success animation on completion
+// show the solution on the page
 board.App.prototype.solveGame = function(){
     this.render(this.solution);
-};
-
-// show the success animation on completion
-board.App.prototype.winGame = function(){
-    
 };
 
