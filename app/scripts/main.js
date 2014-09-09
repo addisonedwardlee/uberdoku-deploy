@@ -17,18 +17,18 @@ board.App = function(options){
     
     this.difficulty = options.difficulty || 'easy';
 
-    this.createGame(options);
+    this.createGame();
 };
 
-board.App.prototype.createGame = function(options){
+board.App.prototype.createGame = function(){
     // create a solution board
     this.solution = this.generateSolution();
 
     // create the board that's actually rendered
-    this.game = this.generateGame(this.solution, this.difficulty);
-    this.render();
+    this.game = this.generateGame($.extend(true, [], this.solution), this.difficulty);
+    this.render(this.game);
     this.addListeners();
-}
+};
 
 // random sudoku game generator
 board.App.prototype.generateSolution = function(){
@@ -59,11 +59,14 @@ board.App.prototype.generateGame = function(game, difficulty){
 };
 
 // render the board to the page
-board.App.prototype.render = function(){
+board.App.prototype.render = function(game){
+    // reset the board before creating a new one
+    this.main.html('');
+
     // selector since 'this' refers to window in the functions below
     var main = this.main;
 
-    this.game.forEach(function( row, rowNum ) {
+    game.forEach(function( row, rowNum ) {
         main.append('<div class="row" data-row='+rowNum+'></div>');
 
         // Create each cell in the row
@@ -100,6 +103,14 @@ board.App.prototype.addListeners = function(){
             }
         }
     });
+
+    $('.new-game').click(function(){
+        self.createGame(self.difficulty);
+    });
+
+    $('.solution-button').click(function(){
+        self.solveGame();
+    });
 };
 
 // change the styling of the cell if correct number added
@@ -118,6 +129,11 @@ board.App.prototype.setCellCorrect = function(element){
 // change the styling of the cell if incorrect number added
 board.App.prototype.setCellIncorrect = function(element){
     element.addClass('invalid');
+};
+
+// show the success animation on completion
+board.App.prototype.solveGame = function(){
+    this.render(this.solution);
 };
 
 // show the success animation on completion
