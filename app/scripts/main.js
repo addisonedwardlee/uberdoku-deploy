@@ -6,23 +6,32 @@ var board = {};
 board.init = function(){
     console.log('creating a new board');
     board.app = new board.App({
-        difficulty: 'easy'
+        difficulty: 'hard'
     });
 };
 
 // create an App class
 board.App = function(options){
+    // main DOM div where the board will be rendered
     this.main = $('#main');
     
     this.difficulty = options.difficulty || 'easy';
 
-    this.solution = this.generateBoard(this.difficulty);
-    this.render();
-    this.addListeners();
+    this.createGame(options);
 };
 
+board.App.prototype.createGame = function(options){
+    // create a solution board
+    this.solution = this.generateSolution();
+
+    // create the board that's actually rendered
+    this.game = this.generateGame(this.solution, this.difficulty);
+    this.render();
+    this.addListeners();
+}
+
 // random sudoku game generator
-board.App.prototype.generateBoard = function(){
+board.App.prototype.generateSolution = function(){
     return [[2,4,8,3,9,5,7,1,6],
             [5,7,1,6,2,8,3,4,9],
             [9,3,6,7,4,1,5,8,2],
@@ -34,18 +43,38 @@ board.App.prototype.generateBoard = function(){
             [4,2,7,9,5,3,8,6,1]];
 };
 
+// random sudoku game generator
+board.App.prototype.generateGame = function(game, difficulty){
+    var difficulties = {
+        'easy' : 20,
+        'normal' : 40,
+        'hard' : 60
+    };
+    for(var i = 0; i < difficulties[difficulty]; i++){
+        var row = Math.floor(Math.random()*9);
+        var column = Math.floor(Math.random()*9);
+        game[row][column] = 'blank';
+    }
+    return game;
+};
+
 // render the board to the page
 board.App.prototype.render = function(){
     // selector since 'this' refers to window in the functions below
     var main = this.main;
 
-    this.solution.forEach(function( row, rowNum ) {
+    this.game.forEach(function( row, rowNum ) {
         main.append('<div class="row" data-row='+rowNum+'></div>');
 
         // Create each cell in the row
         row.forEach(function( data, colNum ) {
-            $('.row[data-row='+rowNum+']')
-            .append('<input class="number-element" type="text" min="1" max="9" maxlength="1" data-col='+colNum+' value='+data+' />');
+            if(data === 'blank'){
+                $('.row[data-row='+rowNum+']')
+                .append('<input class="number-element" type="text" min="1" max="9" maxlength="1" data-col='+colNum+' />');
+            } else {
+                $('.row[data-row='+rowNum+']')
+                .append('<input class="number-element" type="text" min="1" max="9" maxlength="1" data-col='+colNum+' value='+data+' disabled/>');
+            }
         });
     });
 };
@@ -63,6 +92,7 @@ board.App.prototype.addListeners = function(){
         var val = $target.val() ? parseInt( $target.val() ) : null;
 
         if( row && col && val){
+            console.log(row, col, val);
             if( self.checkIfValid(row, col, val) ) {
                 self.setCellCorrect( $target );
             } else {
