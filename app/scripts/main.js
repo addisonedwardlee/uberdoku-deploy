@@ -4,7 +4,7 @@ var board = {};
 
 // create a new game board
 board.init = function(){
-    this.app = new board.App({
+    board.app = new board.App({
         difficulty: 'hard'
     });
 };
@@ -16,10 +16,10 @@ board.App = function(options){
     
     this.difficulty = options.difficulty || 'easy';
 
-    this.createGame();
+    this.startGame();
 };
 
-board.App.prototype.createGame = function(){
+board.App.prototype.startGame = function(){
     // create a solution board
     this.solution = this.generateSolution();
 
@@ -106,7 +106,7 @@ board.App.prototype.addListeners = function(){
 
     // listener for new game button
     $('.new-game').click(function(){
-        self.createGame(self.difficulty);
+        self.startGame(self.difficulty);
     });
 
     // listener to show the solution
