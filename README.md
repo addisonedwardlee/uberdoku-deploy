@@ -52,7 +52,7 @@ game.forEach(function( row, rowNum ) {
   // for each data element in the row
   row.forEach(function( data, colNum ) {
     // render it
-    $('.row').append('<input />');
+    $('.row').append('<input data="data" />');
   });
 });
 ```
